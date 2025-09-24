@@ -1,0 +1,23 @@
+[
+  {
+    "slug": "santa-tecla",
+    "nombre": "Santa Tecla",
+    "municipios": ["Santa Tecla"],
+    "lat": 13.6769,
+    "lon": -89.2797
+  },
+  {
+    "slug": "san-salvador",
+    "nombre": "San Salvador",
+    "municipios": ["San Salvador"],
+    "lat": 13.6929,
+    "lon": -89.2182
+  },
+  {
+    "slug": "merliot",
+    "nombre": "Merliot",
+    "municipios": ["Antiguo Cuscatlán", "Ciudad Merliot"],
+    "lat": 13.6682,
+    "lon": -89.2365
+  }
+]
