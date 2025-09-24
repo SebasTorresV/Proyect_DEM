@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ChivoSpot | Detalle de evento</title>
+  <meta name="description" content="Ficha detallada de un evento en ChivoSpot.">
+  <link rel="canonical" href="./evento.html">
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" href="./assets/icons/favicon.svg" type="image/svg+xml">
+  <meta property="og:title" content="Evento | ChivoSpot">
+  <meta property="og:description" content="Detalles completos para llegar a tu evento favorito.">
+  <meta property="og:image" content="./assets/icons/og-image.png">
+  <link rel="stylesheet" href="./styles/base.css">
+  <link rel="stylesheet" href="./styles/layout.css">
+  <link rel="stylesheet" href="./styles/components.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrapper header-inner">
+      <a class="brand" href="./index.html" aria-label="Volver al inicio">
+        <span aria-hidden="true">⬅</span>
+        <span class="brand-text">ChivoSpot</span>
+      </a>
+      <h1 class="page-title" id="eventTitle">Evento</h1>
+    </div>
+  </header>
+
+  <main class="wrapper" id="mainContent">
+    <article id="eventDetail" class="event-detail" aria-live="polite">
+      <div class="event-media">
+        <img id="eventImage" src="" alt="" loading="lazy">
+        <div class="event-share">
+          <button id="btnOpenLocation" class="btn btn-primary" type="button">Abrir ubicación</button>
+          <a id="btnShare" class="btn btn-secondary" target="_blank" rel="noopener" href="#">Compartir</a>
+          <button id="btnSave" class="btn btn-ghost" type="button">Guardar</button>
+        </div>
+      </div>
+      <div class="event-info">
+        <p id="eventTiming" class="event-meta"></p>
+        <p id="eventLocation" class="event-meta"></p>
+        <p id="eventPrice" class="event-meta"></p>
+        <p id="eventCategory" class="event-meta"></p>
+        <div id="eventDescription" class="event-description"></div>
+        <a id="eventExternalLink" class="btn btn-link" target="_blank" rel="noopener" href="#">Ir al sitio del evento</a>
+      </div>
+    </article>
+    <section id="relatedSection" class="related-events" aria-labelledby="relatedTitle">
+      <div class="section-header">
+        <h2 id="relatedTitle" class="section-title">También te puede interesar</h2>
+      </div>
+      <div id="relatedList" class="cards-grid">
+        <!-- Relacionados -->
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrapper footer-inner">
+      <p>&copy; <span id="yearCopy"></span> ChivoSpot. Vive la ciudad.</p>
+      <a href="./sitemap.xml">Mapa del sitio</a>
+    </div>
+  </footer>
+
+  <script type="module" src="./scripts/evento.js"></script>
+</body>
+</html>

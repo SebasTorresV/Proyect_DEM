@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ChivoSpot | Eventos cerca de ti</title>
+  <meta name="description" content="Descubre eventos en Santa Tecla, San Salvador y Merliot. Usa tu ubicación para encontrar lo mejor cerca de ti.">
+  <link rel="canonical" href="./index.html">
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" href="./assets/icons/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="./assets/icons/icon-192.png">
+  <meta property="og:title" content="ChivoSpot">
+  <meta property="og:description" content="Eventos y planes cerca de ti en Santa Tecla, San Salvador y Merliot.">
+  <meta property="og:image" content="./assets/icons/og-image.png">
+  <meta property="og:type" content="website">
+  <link rel="stylesheet" href="./styles/base.css">
+  <link rel="stylesheet" href="./styles/layout.css">
+  <link rel="stylesheet" href="./styles/components.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrapper header-inner">
+      <a class="brand" href="./index.html" aria-label="ChivoSpot inicio">
+        <span aria-hidden="true">📍</span>
+        <span class="brand-text">ChivoSpot</span>
+      </a>
+      <nav aria-label="Zonas destacadas">
+        <ul class="zone-chips" id="zoneChips" role="list">
+          <!-- Chips generados dinámicamente -->
+        </ul>
+      </nav>
+      <button class="btn btn-primary" id="btnUseLocation" type="button">
+        Usar mi ubicación
+      </button>
+    </div>
+  </header>
+
+  <main class="wrapper" id="mainContent">
+    <section class="hero" aria-labelledby="hero-title">
+      <div>
+        <h1 id="hero-title">Eventos que se sienten cerca</h1>
+        <p>Explora qué está pasando hoy, este fin de semana y durante los próximos días en Santa Tecla, San Salvador y Merliot.</p>
+      </div>
+    </section>
+
+    <div id="sectionsContainer" class="sections-grid" aria-live="polite">
+      <!-- Secciones por zona -->
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrapper footer-inner">
+      <p>&copy; <span id="yearCopy"></span> ChivoSpot. Hecho con cariño en El Salvador.</p>
+      <a href="./sitemap.xml">Mapa del sitio</a>
+    </div>
+  </footer>
+
+  <script type="module" src="./scripts/app.js"></script>
+</body>
+</html>
