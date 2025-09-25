@@ -89,16 +89,12 @@ async function cargarEvento() {
     eventLocation.textContent = formatAddress(eventoActual);
     eventPrice.textContent = fmtPrecio(eventoActual.precioMin, eventoActual.precioMax);
     eventCategory.textContent = `Categoría: ${eventoActual.categoria}`;
-    eventDescription.innerHTML = `<p>${eventoActual.descripcion}</p>`;
     if (eventoActual.enlace) {
       eventExternalLink.href = eventoActual.enlace;
       eventExternalLink.hidden = false;
     } else {
       eventExternalLink.hidden = true;
     }
-    const mapaLink = linkMapa(eventoActual.lat, eventoActual.lon);
-    btnOpenLocation.addEventListener("click", () => {
-      window.open(mapaLink, "_blank");
     });
     prepararLinkCompartir(eventoActual);
     btnShare.addEventListener("click", (event) => {
@@ -115,7 +111,6 @@ async function cargarEvento() {
     const relacionados = (await getEventosPorZona(eventoActual.zona))
       .filter((evento) => evento.slug !== eventoActual.slug)
       .slice(0, 3);
-    relacionados.forEach((evento) => relatedList.appendChild(createRelatedCard(evento)));
   } catch (error) {
     console.error(error);
     eventDescription.textContent = "No pudimos cargar la información del evento.";

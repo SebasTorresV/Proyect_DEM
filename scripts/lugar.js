@@ -74,10 +74,6 @@ function renderLista(eventos) {
   eventsList.innerHTML = "";
   if (!eventos.length) {
     emptyState.hidden = false;
-    const hayProximos = eventosZona.some((evento) => isWithinRange(evento.fechaInicio, daysRange(30)));
-    emptyState.textContent = hayProximos
-      ? `No hay eventos que coincidan con tus filtros en ${slugToName(slugZona, zonas)}.`
-      : `No hay eventos hoy en ${slugToName(slugZona, zonas)} — mira los próximos.`;
     return;
   }
   emptyState.hidden = true;

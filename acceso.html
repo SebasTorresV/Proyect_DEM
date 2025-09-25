@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ChivoSpot | Acceso</title>
+  <meta name="description" content="Inicia sesión como administrador u organizador para crear y gestionar eventos en ChivoSpot.">
+  <link rel="canonical" href="./acceso.html">
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" href="./assets/icons/favicon.svg" type="image/svg+xml">
+  <meta property="og:title" content="Panel ChivoSpot">
+  <meta property="og:description" content="Gestiona organizadores y eventos para la comunidad de ChivoSpot.">
+  <meta property="og:image" content="./assets/icons/og-image.png">
+  <link rel="stylesheet" href="./styles/base.css">
+  <link rel="stylesheet" href="./styles/layout.css">
+  <link rel="stylesheet" href="./styles/components.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrapper header-inner">
+      <a class="brand" href="./index.html" aria-label="Regresar al inicio">
+        <span aria-hidden="true">⬅</span>
+        <span class="brand-text">ChivoSpot</span>
+      </a>
+      <h1 class="page-title">Acceso al panel</h1>
+    </div>
+  </header>
+
+  <main class="wrapper auth-grid" id="mainContent">
+    <section class="form-card" aria-labelledby="loginTitle">
+      <h2 id="loginTitle">Iniciar sesión</h2>
+      <p class="form-intro">Ingresa con tu correo y contraseña asignados. Los administradores también pueden usar las credenciales por defecto para configurar el sistema.</p>
+      <form id="loginForm" class="form-grid">
+        <label class="label" for="email">Correo electrónico
+          <input id="email" name="email" type="email" required autocomplete="username">
+        </label>
+        <label class="label" for="password">Contraseña
+          <input id="password" name="password" type="password" required autocomplete="current-password">
+        </label>
+        <button type="submit" class="btn btn-primary">Ingresar</button>
+      </form>
+      <p id="loginFeedback" class="alert" hidden role="alert"></p>
+      <p class="note">Admin por defecto: <span id="adminCredentials"></span></p>
+    </section>
+
+    <section class="role-card" aria-labelledby="rolesTitle">
+      <h2 id="rolesTitle">Roles y permisos</h2>
+      <div class="role-detail">
+        <h3>Administrador</h3>
+        <ul>
+          <li>Crear cuentas de organizadores y revocar accesos.</li>
+          <li>Crear, editar y eliminar cualquier evento publicado.</li>
+          <li>Asignar eventos a organizadores específicos.</li>
+          <li>Supervisar el avance general mediante estadísticas del panel.</li>
+        </ul>
+      </div>
+      <div class="role-detail">
+        <h3>Organizador</h3>
+        <ul>
+          <li>Crear nuevos eventos con toda la información requerida.</li>
+          <li>Consultar estadísticas personales (eventos creados, próximos, precio promedio).</li>
+          <li>Visualizar la lista de eventos publicados por su organización.</li>
+        </ul>
+      </div>
+      <p class="note">Los datos se almacenan en el navegador para facilitar prototipos y pruebas sin backend.</p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrapper footer-inner">
+      <p>&copy; <span id="yearCopy"></span> ChivoSpot. Gestión sencilla de eventos.</p>
+      <a href="./sitemap.xml">Mapa del sitio</a>
+    </div>
+  </footer>
+
+  <script type="module" src="./scripts/acceso.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const yearCopy = document.querySelector('#yearCopy');
+      if (yearCopy) {
+        yearCopy.textContent = new Date().getFullYear();
+      }
+    });
+  </script>
+</body>
+</html>
