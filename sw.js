@@ -1,4 +1,4 @@
-
+const CACHE_NAME = "chivospot-v1";
 const ASSETS = [
   "./",
   "./index.html",
@@ -14,6 +14,8 @@ const ASSETS = [
   "./scripts/utils.js",
   "./scripts/maps.js",
   "./scripts/geoloc.js",
+  "./datos/eventos.json",
+  "./datos/zonas.json"
 ];
 
 self.addEventListener("install", (event) => {

@@ -46,7 +46,15 @@ export function fmtTiempoRelativo(fechaISO) {
 }
 
 export function fmtPrecio(min, max) {
-
+  if (min === 0 && max === 0) return "Gratis";
+  if (min === max) {
+    return new Intl.NumberFormat("es-SV", {
+      style: "currency",
+      currency: "USD",
+      maximumFractionDigits: 2,
+    }).format(min);
+  }
+  return `${new Intl.NumberFormat("es-SV", { style: "currency", currency: "USD", maximumFractionDigits: 2 }).format(min)} - ${new Intl.NumberFormat("es-SV", { style: "currency", currency: "USD", maximumFractionDigits: 2 }).format(max)}`;
 }
 
 export function slugToName(slug, zonas) {

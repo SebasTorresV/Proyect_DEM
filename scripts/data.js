@@ -1,3 +1,5 @@
+let cacheEventos = null;
+let cacheZonas = null;
 
 async function fetchJSON(path) {
   const response = await fetch(path);
@@ -7,6 +9,11 @@ async function fetchJSON(path) {
   return response.json();
 }
 
+export async function getEventos() {
+  if (!cacheEventos) {
+    cacheEventos = await fetchJSON("./datos/eventos.json");
+  }
+  return cacheEventos;
 }
 
 export async function getZonas() {

@@ -49,7 +49,6 @@ input {
   font-family: inherit;
 }
 
-
 button {
   cursor: pointer;
 }
@@ -147,4 +146,3 @@ button {
   text-align: center;
   color: var(--color-muted);
 }
-

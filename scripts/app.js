@@ -1,4 +1,4 @@
-
+import { getEventos, getZonas } from "./data.js";
 import {
   fmtFechaCorta,
   fmtTiempoRelativo,
@@ -43,6 +43,13 @@ function createCard(evento) {
 function renderSection(zonaSlug) {
   const zona = zonasDisponibles.find((z) => z.slug === zonaSlug);
   if (!zona) return null;
+  const zonaEventos = eventos
+    .filter((evento) => evento.zona === zonaSlug)
+    .sort((a, b) => new Date(a.fechaInicio) - new Date(b.fechaInicio))
+    .slice(0, 8);
+  const rangoHoy = todayRange();
+  const eventosHoy = eventos
+    .filter((evento) => evento.zona === zonaSlug)
     .filter((evento) => {
       const fecha = new Date(evento.fechaInicio);
       return fecha >= rangoHoy.start && fecha <= rangoHoy.end;
@@ -66,7 +73,13 @@ function renderSection(zonaSlug) {
   if (!zonaEventos.length) {
     const mensaje = document.createElement("p");
     mensaje.className = "empty";
-
+    mensaje.innerHTML = `No hay eventos hoy en ${zona.nombre} — mira los de esta semana.`;
+    section.appendChild(mensaje);
+    const proximos = eventos
+      .filter((evento) => evento.zona === zonaSlug)
+      .sort((a, b) => new Date(a.fechaInicio) - new Date(b.fechaInicio))
+      .slice(0, 8);
+    proximos.forEach((evento) => list.appendChild(createCard(evento)));
   } else if (!eventosHoy.length) {
     const mensaje = document.createElement("p");
     mensaje.className = "empty";
@@ -116,6 +129,8 @@ async function init() {
     zonasDisponibles.forEach((zona) => {
       if (!orden.includes(zona.slug)) orden.push(zona.slug);
     });
+    renderChips(orden);
+    renderSections(orden);
   } catch (error) {
     console.error(error);
     const errorMsg = document.createElement("p");
@@ -133,6 +148,8 @@ btnUseLocation?.addEventListener("click", async () => {
     const zona = await inferirZona(coords.latitude, coords.longitude);
     if (zona) {
       const nuevaOrden = [zona.slug, ...zonasDisponibles.map((z) => z.slug).filter((slug) => slug !== zona.slug)];
+      renderChips(nuevaOrden);
+      renderSections(nuevaOrden);
       btnUseLocation.textContent = `Cerca de ti: ${zona.nombre}`;
     } else {
       btnUseLocation.textContent = "No encontramos tu zona";
