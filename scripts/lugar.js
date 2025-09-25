@@ -74,14 +74,6 @@ function renderLista(eventos) {
   eventsList.innerHTML = "";
   if (!eventos.length) {
     emptyState.hidden = false;
-    if (!eventosZona.length) {
-      emptyState.textContent = `Aún no hay eventos publicados en ${slugToName(slugZona, zonas)}. Cuando un organizador cree uno aparecerá aquí.`;
-    } else {
-      const hayProximos = eventosZona.some((evento) => isWithinRange(evento.fechaInicio, daysRange(30)));
-      emptyState.textContent = hayProximos
-        ? `No hay eventos que coincidan con tus filtros en ${slugToName(slugZona, zonas)}.`
-        : `No hay eventos hoy en ${slugToName(slugZona, zonas)} — mira los próximos.`;
-    }
     return;
   }
   emptyState.hidden = true;

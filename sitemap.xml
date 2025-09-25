@@ -16,16 +16,5 @@
     <loc>https://chivospot.local/lugar.html?slug=merliot</loc>
     <priority>0.8</priority>
   </url>
-  <url>
-    <loc>https://chivospot.local/acceso.html</loc>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://chivospot.local/admin.html</loc>
-    <priority>0.4</priority>
-  </url>
-  <url>
-    <loc>https://chivospot.local/organizador.html</loc>
-    <priority>0.4</priority>
-  </url>
+
 </urlset>

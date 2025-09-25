@@ -1,12 +1,9 @@
-const CACHE_NAME = "chivospot-v2";
+
 const ASSETS = [
   "./",
   "./index.html",
   "./lugar.html",
   "./evento.html",
-  "./acceso.html",
-  "./admin.html",
-  "./organizador.html",
   "./styles/base.css",
   "./styles/layout.css",
   "./styles/components.css",
@@ -17,13 +14,6 @@ const ASSETS = [
   "./scripts/utils.js",
   "./scripts/maps.js",
   "./scripts/geoloc.js",
-  "./scripts/auth.js",
-  "./scripts/admin.js",
-  "./scripts/organizador.js",
-  "./scripts/acceso.js",
-  "./datos/eventos.json",
-  "./datos/zonas.json",
-  "./assets/img/placeholder-evento.svg"
 ];
 
 self.addEventListener("install", (event) => {

@@ -49,22 +49,6 @@ input {
   font-family: inherit;
 }
 
-input,
-select,
-textarea {
-  width: 100%;
-  background: rgba(15, 23, 42, 0.8);
-  color: var(--color-text);
-  border: 1px solid rgba(148, 163, 184, 0.3);
-  border-radius: var(--radius-sm);
-  padding: 0.6rem 0.75rem;
-  font-size: 1rem;
-}
-
-textarea {
-  resize: vertical;
-  min-height: 140px;
-}
 
 button {
   cursor: pointer;
@@ -164,7 +148,3 @@ button {
   color: var(--color-muted);
 }
 
-.note {
-  color: var(--color-muted);
-  font-size: 0.95rem;
-}

@@ -15,7 +15,6 @@ const btnOpenLocation = document.querySelector("#btnOpenLocation");
 const btnShare = document.querySelector("#btnShare");
 const btnSave = document.querySelector("#btnSave");
 const relatedList = document.querySelector("#relatedList");
-const eventOwner = document.querySelector("#eventOwner");
 
 let eventoActual = null;
 
@@ -90,31 +89,12 @@ async function cargarEvento() {
     eventLocation.textContent = formatAddress(eventoActual);
     eventPrice.textContent = fmtPrecio(eventoActual.precioMin, eventoActual.precioMax);
     eventCategory.textContent = `Categoría: ${eventoActual.categoria}`;
-    const descripcion = eventoActual.descripcion || "Este evento aún no tiene una descripción detallada.";
-    eventDescription.innerHTML = `<p>${descripcion}</p>`;
     if (eventoActual.enlace) {
       eventExternalLink.href = eventoActual.enlace;
       eventExternalLink.hidden = false;
     } else {
       eventExternalLink.hidden = true;
     }
-    if (eventOwner) {
-      if (eventoActual.creadoPorNombre) {
-        eventOwner.textContent = `Organizado por ${eventoActual.creadoPorNombre}`;
-        eventOwner.hidden = false;
-      } else {
-        eventOwner.hidden = true;
-      }
-    }
-    const mapaLink = linkMapa(eventoActual.lat, eventoActual.lon);
-    if (!eventoActual.lat || !eventoActual.lon) {
-      btnOpenLocation.disabled = true;
-      btnOpenLocation.textContent = "Ubicación pendiente";
-    }
-    btnOpenLocation.addEventListener("click", () => {
-      if (eventoActual.lat && eventoActual.lon) {
-        window.open(mapaLink, "_blank");
-      }
     });
     prepararLinkCompartir(eventoActual);
     btnShare.addEventListener("click", (event) => {
@@ -131,14 +111,6 @@ async function cargarEvento() {
     const relacionados = (await getEventosPorZona(eventoActual.zona))
       .filter((evento) => evento.slug !== eventoActual.slug)
       .slice(0, 3);
-    if (!relacionados.length) {
-      const empty = document.createElement("p");
-      empty.className = "empty";
-      empty.textContent = "No hay eventos relacionados aún.";
-      relatedList.appendChild(empty);
-    } else {
-      relacionados.forEach((evento) => relatedList.appendChild(createRelatedCard(evento)));
-    }
   } catch (error) {
     console.error(error);
     eventDescription.textContent = "No pudimos cargar la información del evento.";

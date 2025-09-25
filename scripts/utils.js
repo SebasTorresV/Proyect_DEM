@@ -46,16 +46,7 @@ export function fmtTiempoRelativo(fechaISO) {
 }
 
 export function fmtPrecio(min, max) {
-  const formatter = new Intl.NumberFormat("es-SV", {
-    style: "currency",
-    currency: "USD",
-    maximumFractionDigits: 2,
-  });
-  if (min === 0 && max === 0) return "Gratis";
-  if (min === max) {
-    return formatter.format(min);
-  }
-  return `${formatter.format(min)} - ${formatter.format(max)}`;
+
 }
 
 export function slugToName(slug, zonas) {
@@ -108,28 +99,4 @@ export function isWithinRange(fechaISO, { start, end }) {
 export function formatAddress(evento) {
   const partes = [evento.lugar, evento.municipio].filter(Boolean);
   return partes.join(" · ");
-}
-
-export function slugify(texto) {
-  return texto
-    .toLowerCase()
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/(^-|-$)/g, "")
-    .trim();
-}
-
-export function toDatetimeLocal(fechaISO) {
-  if (!fechaISO) return "";
-  const fecha = new Date(fechaISO);
-  if (Number.isNaN(fecha.getTime())) return "";
-  const pad = (num) => String(num).padStart(2, "0");
-  return `${fecha.getFullYear()}-${pad(fecha.getMonth() + 1)}-${pad(fecha.getDate())}T${pad(fecha.getHours())}:${pad(fecha.getMinutes())}`;
-}
-
-export function promedioNumeros(valores = []) {
-  if (!valores.length) return 0;
-  const suma = valores.reduce((acc, num) => acc + Number(num || 0), 0);
-  return suma / valores.length;
 }

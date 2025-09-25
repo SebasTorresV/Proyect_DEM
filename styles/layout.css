@@ -4,7 +4,7 @@
   justify-content: space-between;
   gap: var(--space-sm);
   padding: var(--space-sm) 0;
-  flex-wrap: wrap;
+
 }
 
 .zone-chips {
@@ -13,16 +13,6 @@
   list-style: none;
   padding: 0;
   margin: 0;
-}
-
-.header-actions {
-  display: flex;
-  align-items: center;
-  gap: var(--space-xs);
-}
-
-.header-actions .badge {
-  white-space: nowrap;
 }
 
 .sections-grid {
@@ -86,40 +76,6 @@
   gap: var(--space-xs);
 }
 
-.form-grid {
-  display: grid;
-  gap: var(--space-sm);
-}
-
-.auth-grid {
-  display: grid;
-  gap: var(--space-xl);
-  padding-block: var(--space-xl);
-}
-
-.dashboard {
-  display: grid;
-  gap: var(--space-xl);
-  padding-block: var(--space-xl);
-}
-
-.dashboard-section {
-  display: grid;
-  gap: var(--space-md);
-  background: rgba(15, 23, 42, 0.65);
-  padding: var(--space-lg);
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-sm);
-}
-
-.stats-grid {
-  display: grid;
-  gap: var(--space-sm);
-}
-
-.table-wrapper {
-  overflow-x: auto;
-}
 
 .filters {
   display: grid;
@@ -196,14 +152,6 @@
     display: flex;
   }
 
-  .auth-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    align-items: start;
-  }
-
-  .stats-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
 
   .cards-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -230,10 +178,6 @@
 
   .card {
     grid-template-rows: auto 1fr auto;
-  }
-
-  .stats-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   .event-detail {

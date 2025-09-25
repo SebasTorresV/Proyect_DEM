@@ -1,4 +1,4 @@
-import { getEventos, getZonas, obtenerStorageKeys } from "./data.js";
+
 import {
   fmtFechaCorta,
   fmtTiempoRelativo,
@@ -17,7 +17,6 @@ const yearCopy = document.querySelector("#yearCopy");
 const DEFAULT_ZONES = ["santa-tecla", "san-salvador", "merliot"];
 let zonasDisponibles = [];
 let eventos = [];
-let ordenActual = [];
 
 function createCard(evento) {
   const article = document.createElement("article");
@@ -44,13 +43,6 @@ function createCard(evento) {
 function renderSection(zonaSlug) {
   const zona = zonasDisponibles.find((z) => z.slug === zonaSlug);
   if (!zona) return null;
-  const eventosZona = eventos.filter((evento) => evento.zona === zonaSlug);
-  const zonaEventos = eventosZona
-    .slice()
-    .sort((a, b) => new Date(a.fechaInicio) - new Date(b.fechaInicio))
-    .slice(0, 8);
-  const rangoHoy = todayRange();
-  const eventosHoy = eventosZona
     .filter((evento) => {
       const fecha = new Date(evento.fechaInicio);
       return fecha >= rangoHoy.start && fecha <= rangoHoy.end;
@@ -74,17 +66,7 @@ function renderSection(zonaSlug) {
   if (!zonaEventos.length) {
     const mensaje = document.createElement("p");
     mensaje.className = "empty";
-    if (!eventosZona.length) {
-      mensaje.innerHTML = `Aún no hay eventos publicados en ${zona.nombre}. Pide a un organizador que cree uno desde el panel correspondiente.`;
-    } else {
-      mensaje.innerHTML = `No hay eventos hoy en ${zona.nombre} — mira los de esta semana.`;
-    }
-    section.appendChild(mensaje);
-    eventosZona
-      .slice()
-      .sort((a, b) => new Date(a.fechaInicio) - new Date(b.fechaInicio))
-      .slice(0, 8)
-      .forEach((evento) => list.appendChild(createCard(evento)));
+
   } else if (!eventosHoy.length) {
     const mensaje = document.createElement("p");
     mensaje.className = "empty";
@@ -125,13 +107,6 @@ function renderSections(order) {
     const section = renderSection(slug);
     if (section) sectionsContainer.appendChild(section);
   });
-  if (!eventos.length) {
-    const aviso = document.createElement("p");
-    aviso.className = "empty";
-    aviso.innerHTML =
-      "Aún no hay eventos publicados. Los administradores y organizadores pueden crear el primero desde el panel de gestión.";
-    sectionsContainer.appendChild(aviso);
-  }
 }
 
 async function init() {
@@ -141,9 +116,6 @@ async function init() {
     zonasDisponibles.forEach((zona) => {
       if (!orden.includes(zona.slug)) orden.push(zona.slug);
     });
-    ordenActual = orden;
-    renderChips(ordenActual);
-    renderSections(ordenActual);
   } catch (error) {
     console.error(error);
     const errorMsg = document.createElement("p");
@@ -161,9 +133,6 @@ btnUseLocation?.addEventListener("click", async () => {
     const zona = await inferirZona(coords.latitude, coords.longitude);
     if (zona) {
       const nuevaOrden = [zona.slug, ...zonasDisponibles.map((z) => z.slug).filter((slug) => slug !== zona.slug)];
-      ordenActual = nuevaOrden;
-      renderChips(ordenActual);
-      renderSections(ordenActual);
       btnUseLocation.textContent = `Cerca de ti: ${zona.nombre}`;
     } else {
       btnUseLocation.textContent = "No encontramos tu zona";
@@ -187,12 +156,3 @@ if ("serviceWorker" in navigator) {
     navigator.serviceWorker.register("./sw.js").catch((error) => console.warn("SW no registrado", error));
   });
 }
-
-const storageKeys = obtenerStorageKeys?.() || {};
-
-window.addEventListener("storage", async (event) => {
-  if (event.key === storageKeys.EVENTOS) {
-    eventos = await getEventos();
-    renderSections(ordenActual.length ? ordenActual : DEFAULT_ZONES);
-  }
-});
