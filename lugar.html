@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ChivoSpot | Eventos por zona</title>
+  <meta name="description" content="Lista completa de eventos por zona en ChivoSpot.">
+  <link rel="canonical" href="./lugar.html">
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" href="./assets/icons/favicon.svg" type="image/svg+xml">
+  <meta property="og:title" content="Eventos por zona | ChivoSpot">
+  <meta property="og:description" content="Explora eventos filtrados por zona con mapa y filtros rápidos.">
+  <meta property="og:image" content="./assets/icons/og-image.png">
+  <link rel="stylesheet" href="./styles/base.css">
+  <link rel="stylesheet" href="./styles/layout.css">
+  <link rel="stylesheet" href="./styles/components.css">
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-sA+4JrA6G7sJcCq3gwxMZL0pniS3pSDOMkMt2BN3p3s="
+    crossorigin=""
+  >
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrapper header-inner">
+      <a class="brand" href="./index.html" aria-label="Volver al inicio">
+        <span aria-hidden="true">⬅</span>
+        <span class="brand-text">ChivoSpot</span>
+      </a>
+      <h1 id="zoneTitle" class="page-title">Eventos por zona</h1>
+      <div class="header-actions">
+        <a class="btn btn-ghost" href="./acceso.html">Panel de gestión</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrapper" id="mainContent">
+    <section aria-labelledby="filtersTitle" class="filters">
+      <h2 id="filtersTitle" class="section-title">Filtrar</h2>
+      <div class="chips" role="list" aria-label="Filtrar por fecha">
+        <button class="chip" data-range="hoy" type="button">Hoy</button>
+        <button class="chip" data-range="finde" type="button">Este fin</button>
+        <button class="chip" data-range="30d" type="button">Próximos 30 días</button>
+        <button class="chip" data-range="todos" type="button">Todos</button>
+      </div>
+      <div class="filter-selects">
+        <label class="label" for="categoriaSelect">Categoría
+          <select id="categoriaSelect" name="categoria">
+            <option value="todas">Todas</option>
+          </select>
+        </label>
+        <label class="label" for="precioSelect">Costo
+          <select id="precioSelect" name="precio">
+            <option value="todos">Todos</option>
+            <option value="gratis">Gratis</option>
+            <option value="pago">Con costo</option>
+          </select>
+        </label>
+      </div>
+    </section>
+
+    <section aria-labelledby="listTitle" class="zone-list-section">
+      <div class="section-header">
+        <h2 id="listTitle" class="section-title">Eventos disponibles</h2>
+        <div class="section-actions">
+          <button id="btnViewMap" class="btn btn-secondary" type="button">Ver mapa</button>
+        </div>
+      </div>
+      <div id="eventsList" class="cards-grid" aria-live="polite">
+        <!-- Tarjetas -->
+      </div>
+      <p id="emptyState" class="empty" hidden></p>
+    </section>
+
+    <section id="mapSection" class="map-section" hidden>
+      <h2 class="section-title">Mapa de eventos</h2>
+      <div id="map" class="map" role="application" aria-label="Mapa de eventos"></div>
+      <p class="map-note">El mapa utiliza Leaflet desde CDN cuando hay conexión disponible.</p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrapper footer-inner">
+      <p>&copy; <span id="yearCopy"></span> ChivoSpot. Descubre eventos locales.</p>
+      <a href="./sitemap.xml">Mapa del sitio</a>
+    </div>
+  </footer>
+
+  <script type="module" src="./scripts/lugar.js"></script>
+</body>
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ChivoSpot | Panel Organizador</title>
+  <meta name="description" content="Publica eventos y sigue tus estadísticas como organizador de ChivoSpot.">
+  <link rel="canonical" href="./organizador.html">
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" href="./assets/icons/favicon.svg" type="image/svg+xml">
+  <meta property="og:title" content="Panel organizador | ChivoSpot">
+  <meta property="og:description" content="Gestiona tus eventos y consulta métricas relevantes.">
+  <meta property="og:image" content="./assets/icons/og-image.png">
+  <link rel="stylesheet" href="./styles/base.css">
+  <link rel="stylesheet" href="./styles/layout.css">
+  <link rel="stylesheet" href="./styles/components.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrapper header-inner">
+      <a class="brand" href="./index.html" aria-label="Volver al inicio">
+        <span aria-hidden="true">⬅</span>
+        <span class="brand-text">ChivoSpot</span>
+      </a>
+      <h1 class="page-title">Panel de organizador</h1>
+      <div class="header-actions">
+        <span class="badge">Sesión: <strong id="organizerName"></strong></span>
+        <button id="logoutBtn" class="btn btn-ghost" type="button">Cerrar sesión</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrapper dashboard" id="mainContent">
+    <section class="dashboard-section" aria-labelledby="orgStatsTitle">
+      <h2 id="orgStatsTitle" class="section-title">Tus métricas</h2>
+      <div class="stats-grid">
+        <article class="stat-card">
+          <h3>Eventos creados</h3>
+          <p id="orgStatsTotal" class="stat-value">0</p>
+          <p class="stat-note">Incluye borradores publicados desde este panel.</p>
+        </article>
+        <article class="stat-card">
+          <h3>Próximos</h3>
+          <p id="orgStatsUpcoming" class="stat-value">0</p>
+          <p class="stat-note">Con fecha de inicio futura.</p>
+        </article>
+        <article class="stat-card">
+          <h3>Precio medio</h3>
+          <p id="orgStatsAvgPrice" class="stat-value">-</p>
+          <p class="stat-note">Promedio entre rango mínimo y máximo.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="dashboard-section" aria-labelledby="orgFormTitle">
+      <div class="section-header">
+        <h2 id="orgFormTitle" class="section-title">Publicar nuevo evento</h2>
+      </div>
+      <form id="organizerEventForm" class="form-grid" autocomplete="off">
+        <label class="label" for="orgEventTitulo">Título del evento
+          <input id="orgEventTitulo" name="titulo" type="text" required>
+        </label>
+        <label class="label" for="organizerZone">Zona
+          <select id="organizerZone" name="zona" required></select>
+        </label>
+        <label class="label" for="orgEventMunicipio">Municipio/colonia
+          <input id="orgEventMunicipio" name="municipio" type="text" required>
+        </label>
+        <label class="label" for="orgEventLugar">Lugar
+          <input id="orgEventLugar" name="lugar" type="text" required>
+        </label>
+        <label class="label" for="orgEventInicio">Fecha y hora de inicio
+          <input id="orgEventInicio" name="fechaInicio" type="datetime-local" required>
+        </label>
+        <label class="label" for="orgEventFin">Fecha y hora de cierre
+          <input id="orgEventFin" name="fechaFin" type="datetime-local">
+        </label>
+        <label class="label" for="orgEventLat">Latitud
+          <input id="orgEventLat" name="lat" type="number" step="0.000001" required>
+        </label>
+        <label class="label" for="orgEventLon">Longitud
+          <input id="orgEventLon" name="lon" type="number" step="0.000001" required>
+        </label>
+        <label class="label" for="orgEventCategoria">Categoría
+          <select id="orgEventCategoria" name="categoria">
+            <option value="musica">Música</option>
+            <option value="teatro">Teatro</option>
+            <option value="ferias">Ferias</option>
+            <option value="deporte">Deporte</option>
+            <option value="conferencias">Conferencias</option>
+            <option value="familia">Familia</option>
+          </select>
+        </label>
+        <label class="label" for="orgEventPrecioMin">Precio mínimo (USD)
+          <input id="orgEventPrecioMin" name="precioMin" type="number" min="0" step="0.01" value="0">
+        </label>
+        <label class="label" for="orgEventPrecioMax">Precio máximo (USD)
+          <input id="orgEventPrecioMax" name="precioMax" type="number" min="0" step="0.01" value="0">
+        </label>
+        <label class="label" for="orgEventImagen">URL de imagen
+          <input id="orgEventImagen" name="imagen" type="url" placeholder="https://">
+        </label>
+        <label class="label" for="orgEventDescripcion">Descripción
+          <textarea id="orgEventDescripcion" name="descripcion" rows="3" required></textarea>
+        </label>
+        <label class="label" for="orgEventEnlace">Enlace externo
+          <input id="orgEventEnlace" name="enlace" type="url" placeholder="https://">
+        </label>
+        <button type="submit" class="btn btn-primary">Publicar evento</button>
+      </form>
+      <p id="organizerEventFeedback" class="alert" hidden role="status"></p>
+    </section>
+
+    <section class="dashboard-section" aria-labelledby="orgListTitle">
+      <div class="section-header">
+        <h2 id="orgListTitle" class="section-title">Tus eventos publicados</h2>
+      </div>
+      <div id="organizerEventsList" class="cards-grid"></div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrapper footer-inner">
+      <p>&copy; <span id="yearCopy"></span> ChivoSpot. Organización eficiente.</p>
+      <a href="./sitemap.xml">Mapa del sitio</a>
+    </div>
+  </footer>
+
+  <script type="module" src="./scripts/organizador.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const yearCopy = document.querySelector('#yearCopy');
+      if (yearCopy) {
+        yearCopy.textContent = new Date().getFullYear();
+      }
+    });
+  </script>
+</body>
+</html>

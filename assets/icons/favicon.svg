@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <defs>
+    <linearGradient id="gradFav" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ef4444" />
+      <stop offset="100%" stop-color="#22d3ee" />
+    </linearGradient>
+  </defs>
+  <rect width="128" height="128" rx="28" fill="#0f172a" />
+  <path d="M64 24c-14 0-26 12-26 26 0 20 26 54 26 54s26-34 26-54c0-14-12-26-26-26zm0 36a10 10 0 1 1 0-20 10 10 0 0 1 0 20z" fill="url(#gradFav)"/>
+</svg>
